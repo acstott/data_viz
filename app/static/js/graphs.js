@@ -89,7 +89,7 @@ function makeGraphs(error, recordsJson) {
 
 	var drawMap = function(){
 
-	    map.setView([31.75, 110], 4);
+	    map.setView([24.254, 234.132], 4);
 		mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 		L.tileLayer(
 			'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -114,7 +114,7 @@ function makeGraphs(error, recordsJson) {
 	drawMap();
 
 	//Update the heatmap if any dc chart get filtered
-	dcCharts = [timeChart, hostChart, protoChart, scrChart, locationChart];
+	dcCharts = [hostChart, protoChart, srcChart];
 
 	_.each(dcCharts, function (dcChart) {
 		dcChart.on("filtered", function (chart, filter) {

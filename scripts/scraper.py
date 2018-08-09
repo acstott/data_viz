@@ -56,14 +56,3 @@ client = MongoClient('localhost', 27017)
 db = client['dataViz']
 collection = db['secureIp']
 
-# Output to DB
-
-dut_type = dut_var[2]
-dut_name = dut_var[5]
-dut_name_df = pandas.DataFrame({'dut_type': [dut_type], 'dut_name': [dut_name]})
-dut_name_df.set_index('dut_type', inplace=True)
-dut_name_record = json.loads(dut_name_df.to_json())
-db.zappingKPI.insert(dut_name_record)
-
-
-date_as_dt = items[:1][5]
