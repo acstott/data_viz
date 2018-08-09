@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pandas
+import geopandas
 from shapely.geometry import Point, shape
 
 from flask import Flask
 from flask import render_template, jsonify
-from pymongo import MongoClient
+from pymongo import MongoClient, GEO2D
 from bson import json_util
 from bson.json_util import loads, dumps
 import json
@@ -24,8 +25,8 @@ if __name__ == "__main__":
 
 MONGODB_HOST = 'localhost'
 MONGODB_PORT = 27017
-HP_DBS_NAME = 'donorschoose'
-HP_COLLECTION_NAME = 'projects'
+HP_DBS_NAME = 'dataViz'
+HP_COLLECTION_NAME = 'honeyPot'
 HP_FIELDS = {"timestamp" : True, 
 	"host" : True, 
 	"src" : True,
@@ -53,7 +54,15 @@ def get_data():
     json_projects = []
     for project in honeypot_projects:
         json_projects.append(project)
+#    df = pandas.DataFrame(json_projects)
+#    latitude = df['longitude']
+#    longitude = df['longitude']
+#    my_location = [latitude, longitude]
+#    location = geopandas.GeoDataFrame(my_location, Geometry = "geometry")
+#    honeypot_collection.honeypot_projects.create_index([("location", GEO2D)]) 
+#    json_projects.append(location)
     json_projects = json.dumps(json_projects, default=json_util.default)
+    
     connection.close()
     return json_projects
     
