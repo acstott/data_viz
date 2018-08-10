@@ -1,4 +1,6 @@
-# -*- coding: utf-8 -*-
+#-----------------------------------------------------------------------------
+# Import Libraries  
+#-----------------------------------------------------------------------------
 
 import pandas as pandas
 import geopandas
@@ -13,6 +15,10 @@ import json
 
 from app import app 
 
+#-----------------------------------------------------------------------------
+# Define Index Template Route & Map Data Source 
+#-----------------------------------------------------------------------------
+
 data_path = './app/static/lib/js/'
 
 @app.route("/")
@@ -21,19 +27,26 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)
-#    socketio.run(app)
+
+#-----------------------------------------------------------------------------
+# Bind Mongo Variables  
+#-----------------------------------------------------------------------------
 
 MONGODB_HOST = 'localhost'
 MONGODB_PORT = 27017
 HP_DBS_NAME = 'dataViz'
 HP_COLLECTION_NAME = 'honeyPot'
-HP_FIELDS = {"timestamp" : True, 
-	"host" : True, 
-	"src" : True,
-	"proto" : True,
-	"latitude" : True,
+HP_FIELDS = {"latitude" : True, 
 	"longitude" : True,
+	"host" : True,
+	"src" : True,
+        "proto" : True,
+	"count" : True,
         '_id': False}
+
+#-----------------------------------------------------------------------------
+# Map Latitude & Longitude Values to Polygonal GeoJSON File jsno_world  
+#-----------------------------------------------------------------------------
 
 def get_location(latitude, longitude, json_world):
     point = Point(latitude, longitude)
@@ -46,6 +59,14 @@ def get_location(latitude, longitude, json_world):
 with open(data_path + 'world_map.json') as data_file:    
     json_world = json.load(data_file)
 
+#-----------------------------------------------------------------------------
+# Stream Data from Mongo to Route - 
+# Data is Rendered to Views in /static/js/graph.js File by Passing /data Route  
+# queue()
+#    .defer(d3.json, "/data")
+#    .await(makeGraphs); 
+#-----------------------------------------------------------------------------
+
 @app.route("/data")
 def get_data():
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
@@ -54,13 +75,6 @@ def get_data():
     json_projects = []
     for project in honeypot_projects:
         json_projects.append(project)
-#    df = pandas.DataFrame(json_projects)
-#    latitude = df['longitude']
-#    longitude = df['longitude']
-#    my_location = [latitude, longitude]
-#    location = geopandas.GeoDataFrame(my_location, Geometry = "geometry")
-#    honeypot_collection.honeypot_projects.create_index([("location", GEO2D)]) 
-#    json_projects.append(location)
     json_projects = json.dumps(json_projects, default=json_util.default)
     
     connection.close()
