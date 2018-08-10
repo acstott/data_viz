@@ -10,11 +10,9 @@ honeypot <- data.table(honeypot)
 # Load Globals 
 #-----------------------------------------------------------------------------
 
-library(ggmap)
-library(sf)
-library(mapview)
-library(ggplot2)
+
 library(forcats)
+library(mongolite)
 
 #-----------------------------------------------------------------------------
 # Clean Data 
