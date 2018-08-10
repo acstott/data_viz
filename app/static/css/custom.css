@@ -2,7 +2,10 @@
     font-size: 55px;
 }
 
-.dc-chart g.row text {
-    fill: black;
-
+div#wrapper {
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
+

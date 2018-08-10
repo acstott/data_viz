@@ -52,7 +52,7 @@ function makeGraphs(error, recordsJson) {
         .dimension(hostDim)
         .group(hostGroup)
         .ordering(function(d) { return -d.value })
-        .colors(['#6baed6'])
+        .colors(['#231B12', '#4C3F54', '#07575B', '#505160', '#375E97', '#4CB5F5', '#68829E', '#4897D8', '#1995AD'])
         .elasticX(true)
         .xAxis().ticks(4);
 
