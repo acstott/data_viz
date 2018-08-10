@@ -21,47 +21,51 @@ To Get Started, Install Dependencies:
 
 PYTHON DEPENDENCIES
 
-Python-3.7
-pip3
-venv
+> Python-3.7
+> pip3
+> venv
 
 Create a virtual environment called shell:
 
-virtualenv shell
+> virtualenv shell
 
 Activate the environment within the project directory:
 
-source shell/bin/activate
+> source shell/bin/activate
 
 Log into the virtual environment:
 
-pipenv shell
+> pipenv shell
 
 Install remaining dependencies within the shell:
 
-pip3 install Flask
-pip3 install pandas
-pip3 install shapely
-pip3 install geopandas
-pip3 install pymongo
-pip3 install bson  
+> pip3 install Flask
+> pip3 install pandas
+> pip3 install shapely
+> pip3 install geopandas
+> pip3 install pymongo
+> pip3 install bson  
 
 SYSTEM DEPENDENCIES
 
 Install mongod, mongo and R. Start up a mongo deamon (mongod instance) in the background:
 
-mongod &
+> mongod &
 
 To populate the data into Mongo I used R. The script to do this is found in /data_viz/scripts/honeypot.R.
 Install R and associated dependencies:
 
-install.packages('mongolite')
-install.packages('forcats')
-install.packages('data.table')
+> install.packages('mongolite')
+> install.packages('forcats')
+> install.packages('data.table')
 
-Run the script and populate Mongo with records. Check that the records exist:
+Run the script and populate Mongo with records from the command line:
 
-mongo
+> R -f honeypot.R 
+
+Check that the records exist:
+
+> mongo
 
 > use dataViz
 > show collections
@@ -80,7 +84,7 @@ To display records in JSON formatted output:
 
 Once the database has been populated, execute the following command in the root directory of data_viz project:
 
-export FLASK_APP=run.py
+> export FLASK_APP=run.py
 
 then type flask run and assuming everything worked properly the site will be running locally on 127.0.0.1:5000
 
