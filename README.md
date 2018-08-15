@@ -31,11 +31,11 @@ Create a virtual environment called shell:
 
 Activate the environment within the project directory:
 
-> source shell/bin/activate
+> source shell/bin/activate or source app/bin/activate 
 
 Log into the virtual environment:
 
-> pipenv shell
+> pipenv shell 
 
 Install remaining dependencies within the shell:
 
