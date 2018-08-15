@@ -22,7 +22,7 @@ library(mongolite)
 
 honeypot <- data.frame(honeypot %>% 
                          filter(!is.na(latitude) & !is.na(longitude),
-                                latitude <= 100))
+                                latitude <= 90))
 
 honeypot_data <- data.table(character(length(honeypot$host)),
                               character(length(honeypot$src)),
